@@ -1,32 +1,29 @@
-import { getVisibleContacts } from "./redux/phonebook/phonebook-selectors";
 import { fetchContacts } from "./redux/phonebook/phonebook-operations";
-import { Wrapper, Title, TitleContacts, P } from "./App.styled";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Toaster } from "react-hot-toast";
-import ContactForm from "./components/ContactForm/ContactForm";
-import ContactList from "./components/ContactList/ContactList";
-import Filter from "./components/Filter/Filter";
 
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import Container from "./components/Container/Container";
+import { Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import AppBar from "./components/AppBar/AppBar";
 export default function App() {
-	const contacts = useSelector(getVisibleContacts);
 	const dispatch = useDispatch();
 	useEffect(() => dispatch(fetchContacts()), [dispatch]);
 
 	return (
-		<Wrapper>
-			<Toaster />
-
-			<Title>Phonebook</Title>
-			<ContactForm />
-			<TitleContacts>Contacts</TitleContacts>
-
-			<Filter />
-			{contacts.length > 0 ? (
-				<ContactList contacts={contacts} />
-			) : (
-				<P>Your phonebook is empty.</P>
-			)}
-		</Wrapper>
+		<Container>
+			<AppBar />
+			<Suspense fallback={<h3>Loading...</h3>}>
+				<Routes>
+					<Route path="/"></Route>
+					<Route path="/movies/:filmId">
+						<Route path="cast"></Route>
+						<Route path="reviews"></Route>
+					</Route>
+					<Route path="/movies"></Route>
+					<Route path="*"></Route>
+				</Routes>
+			</Suspense>
+		</Container>
 	);
 }
