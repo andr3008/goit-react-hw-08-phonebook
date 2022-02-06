@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
 export const Div = styled.div`
-	display: block;
-	margin-top: 10px;
-	color: rgb(57, 133, 168);
-	font-weight: 500;
-	font-size: 18px;
+	display: inline-block;
+	text-decoration: none;
+	padding: 12px;
+	font-weight: 700;
+	color: #2a363b;
 `;

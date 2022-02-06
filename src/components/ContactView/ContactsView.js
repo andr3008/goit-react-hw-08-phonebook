@@ -1,14 +1,14 @@
-import { getVisibleContacts } from "./redux/phonebook/phonebook-selectors";
-import { fetchContacts } from "./redux/phonebook/phonebook-operations";
-import { Wrapper, Title, TitleContacts, P } from "./App.styled";
+import { getVisibleContacts } from "../../redux/phonebook/phonebook-selectors";
+import { fetchContacts } from "../../redux/phonebook/phonebook-operations";
+import { Wrapper, Title, TitleContacts, P } from "./ContactView.styled";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Toaster } from "react-hot-toast";
-import ContactForm from "./components/ContactForm/ContactForm";
-import ContactList from "./components/ContactList/ContactList";
-import Filter from "./components/Filter/Filter";
+import ContactForm from "../ContactForm/ContactForm";
+import ContactList from "../ContactList/ContactList";
+import Filter from "../Filter/Filter";
 
-export default function App() {
+export default function ContactView() {
   const contacts = useSelector(getVisibleContacts);
   const dispatch = useDispatch();
   useEffect(() => dispatch(fetchContacts()), [dispatch]);

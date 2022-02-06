@@ -21,7 +21,7 @@ const Navigation = () => (
 				Home
 			</NavLink>
 
-			<NavLink to="/contacts" style={styles.link}>
+			<NavLink end to="/contacts" style={styles.link}>
 				Contacts
 			</NavLink>
 		</nav>

@@ -10,10 +10,10 @@ export default function ContactList() {
 
 	return (
 		<Ul>
-			{contacts.map(({ id, name, phone }) => (
+			{contacts.map(({ id, name, number }) => (
 				<Li key={id}>
 					<P>
-						{name}: {phone}
+						{name}: {number}
 					</P>
 					<Button type="button" onClick={() => onDelete(id)}>
 						Delete

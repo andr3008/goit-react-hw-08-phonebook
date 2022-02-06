@@ -1,26 +1,16 @@
 import Navigation from "../Navigation/Navigation";
 import UserMenu from "../UserMenu/UserMenu";
 import AuthNav from "../AuthNav/AuthNav";
-import { Outlet } from "react-router-dom";
-
-const styles = {
-	header: {
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-		borderBottom: "1px solid #2A363B",
-	},
-};
+import { useSelector } from "react-redux";
+import { authSelectors } from "../../redux/auth";
+import { Header } from "./AppBar.styled";
 
 export default function AppBar() {
+	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 	return (
-		<>
-			<header style={styles.header}>
-				<Navigation />
-				<AuthNav />
-				<UserMenu />
-			</header>
-			<Outlet />
-		</>
+		<Header>
+			<Navigation />
+			{isLoggedIn ? <UserMenu /> : <AuthNav />}
+		</Header>
 	);
 }
