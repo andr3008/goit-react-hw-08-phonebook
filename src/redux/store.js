@@ -12,7 +12,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import contactsReducer from "./phonebook/phonebook-reducer";
-import { authReducer } from "./auth";
+import authReducer from "./auth/auth-slice";
 
 const middleware = [
   ...getDefaultMiddleware({

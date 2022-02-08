@@ -1,17 +1,17 @@
 // import { fetchContacts } from "./redux/phonebook/phonebook-operations";
 import { fetchCurrentUser } from "./redux/auth/auth-operations";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import Container from "./components/Container/Container";
-import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import HomeView from "./views/Homeview/HomeView";
+
+import { Routes, Route, Navigate } from "react-router-dom";
+import PublicRoute from "./components/PublicRoute/PublicRoute";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AppBar from "./components/AppBar/AppBar";
-const HomeView = lazy(() => import("./views/HomeView"));
-const RegisterView = lazy(() => import("./views/RegisterView"));
-const LoginView = lazy(() => import("./views/LoginView"));
-const ContactsView = lazy(() =>
-	import("./components/ContactView/ContactsView")
-);
+import RegisterView from "./views/RegisterView";
+import Login from "./views/Login";
+import Contacts from "./components/Contacts/Contacts";
 
 export default function App() {
 	const dispatch = useDispatch();
@@ -20,17 +20,30 @@ export default function App() {
 		dispatch(fetchCurrentUser());
 	}, [dispatch]);
 
-	return (
-		<Container>
+	const isFetchingCurrentUser = useSelector((state) => state.isFetchingCurrent);
+
+	return !isFetchingCurrentUser ? (
+		<div className="App">
 			<AppBar />
-			<Suspense fallback={<h3>Loading...</h3>}>
-				<Routes>
-					<Route path="/" element={<HomeView />}></Route>
-					<Route path="/register" element={<RegisterView />}></Route>
-					<Route path="/login" element={<LoginView />}></Route>
-					{<Route path="/contacts" element={<ContactsView />}></Route>}
-				</Routes>
-			</Suspense>
-		</Container>
+			<Routes>
+				<Route
+					path="register"
+					element={<PublicRoute component={RegisterView} restricted />}
+				/>
+				<Route
+					path="login"
+					element={<PublicRoute component={Login} restricted />}
+				/>
+				<Route
+					path="contacts"
+					element={<PrivateRoute component={Contacts} />}
+				/>
+				<Route path="/home" element={<HomeView />} />
+				<Route path="*" element={<Navigate to="/home" />} />
+			</Routes>
+			<ToastContainer />
+		</div>
+	) : (
+		<div>Loading...</div>
 	);
 }
