@@ -1,10 +1,10 @@
 import { fetchCurrentUser } from "./redux/auth/auth-operations";
 import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import { Routes, Route, Navigate } from "react-router-dom";
-import PublicRoute from "./components/PublicRoute/PublicRoute";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 import AppBar from "./components/AppBar/AppBar";
 import { Container, Title, P } from "./App.styled";
 const HomeView = lazy(() => import("./views/HomeView/HomeView"));
@@ -42,10 +42,10 @@ export default function App() {
 								path="contacts"
 								element={<PrivateRoute component={ContactsView} />}
 							/>
-							<Route path="/home" element={<HomeView />} />
-							<Route path="*" element={<Navigate to="/home" />} />
+							<Route path="home" element={<HomeView />} />
+							<Route path="*" element={<Navigate to="home" />} />
 						</Routes>
-						<ToastContainer />
+						{/* <ToastContainer /> */}
 					</Suspense>
 				</>
 			)}

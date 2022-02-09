@@ -11,7 +11,16 @@ export default function AppBar() {
 	const isLoggedIn = useSelector(getIsLoggedIn);
 	return (
 		<Header>
-			<NavLink end to="/home">
+			<NavLink
+				end
+				to="home"
+				style={({ isActive }) => ({
+					color: isActive ? "#dc0088" : "white",
+					textDecoration: "none",
+					paddingLeft: 20,
+					padding: 6,
+				})}
+			>
 				Phonebook
 			</NavLink>
 			{!isLoggedIn ? (
