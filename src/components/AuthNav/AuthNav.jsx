@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const styles = {
 	link: {
@@ -18,14 +18,13 @@ export default function AuthNav() {
 	return (
 		<>
 			<div>
-				<NavLink to="/register" style={styles.link}>
+				<NavLink end to="/register" style={styles.link}>
 					Registration
 				</NavLink>
-				<NavLink to="/login" style={styles.link}>
+				<NavLink end to="/login" style={styles.link}>
 					Sign In
 				</NavLink>
 			</div>
-			<Outlet />
 		</>
 	);
 }

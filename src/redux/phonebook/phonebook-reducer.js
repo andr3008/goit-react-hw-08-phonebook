@@ -12,8 +12,9 @@ const items = createReducer([], {
     ...state,
   ],
 
-  [contactsReducers.deleteContact.fulfilled]: (state, { payload }) =>
-    state.filter(({ id }) => id !== payload.id),
+  [contactsReducers.deleteContact.fulfilled]: (state, { payload }) => {
+    return state.filter((contact) => contact.id !== payload);
+  },
 });
 
 export default combineReducers({ items, filter });

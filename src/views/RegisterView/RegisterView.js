@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logIn } from "../redux/auth/auth-operations";
+import { register } from "../../redux/auth/auth-operations";
 
 const styles = {
   form: {
@@ -13,13 +13,16 @@ const styles = {
   },
 };
 
-export default function LoginView() {
+export default function RegisterView() {
   const dispatch = useDispatch();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
+      case "name":
+        return setName(value);
       case "email":
         return setEmail(value);
       case "password":
@@ -31,16 +34,22 @@ export default function LoginView() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(logIn({ email, password }));
+    dispatch(register({ name, email, password }));
+    setName("");
     setEmail("");
     setPassword("");
   };
 
   return (
     <div>
-      <h1>Login page</h1>
+      <h1>Registration Page</h1>
 
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
+        <label style={styles.label}>
+          Name
+          <input type="text" name="name" value={name} onChange={handleChange} />
+        </label>
+
         <label style={styles.label}>
           Email
           <input
@@ -61,7 +70,7 @@ export default function LoginView() {
           />
         </label>
 
-        <button type="submit">SignIn</button>
+        <button type="submit">Registration</button>
       </form>
     </div>
   );

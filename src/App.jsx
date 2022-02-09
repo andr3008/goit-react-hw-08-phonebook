@@ -1,17 +1,16 @@
-// import { fetchContacts } from "./redux/phonebook/phonebook-operations";
 import { fetchCurrentUser } from "./redux/auth/auth-operations";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import HomeView from "./views/Homeview/HomeView";
-
 import { Routes, Route, Navigate } from "react-router-dom";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AppBar from "./components/AppBar/AppBar";
-import RegisterView from "./views/RegisterView";
-import Login from "./views/Login";
-import Contacts from "./components/Contacts/Contacts";
+import { Container, Title, P } from "./App.styled";
+const HomeView = lazy(() => import("./views/HomeView/HomeView"));
+const RegisterView = lazy(() => import("./views/RegisterView/RegisterView"));
+const LoginView = lazy(() => import("./views/LoginView/LoginView"));
+const ContactsView = lazy(() => import("./views/ContactsView/ContactsView"));
 
 export default function App() {
 	const dispatch = useDispatch();
@@ -22,28 +21,34 @@ export default function App() {
 
 	const isFetchingCurrentUser = useSelector((state) => state.isFetchingCurrent);
 
-	return !isFetchingCurrentUser ? (
-		<div className="App">
-			<AppBar />
-			<Routes>
-				<Route
-					path="register"
-					element={<PublicRoute component={RegisterView} restricted />}
-				/>
-				<Route
-					path="login"
-					element={<PublicRoute component={Login} restricted />}
-				/>
-				<Route
-					path="contacts"
-					element={<PrivateRoute component={Contacts} />}
-				/>
-				<Route path="/home" element={<HomeView />} />
-				<Route path="*" element={<Navigate to="/home" />} />
-			</Routes>
-			<ToastContainer />
-		</div>
-	) : (
-		<div>Loading...</div>
+	return (
+		<Container>
+			{isFetchingCurrentUser ? (
+				<Title>Show React Skeleton</Title>
+			) : (
+				<>
+					<AppBar />
+					<Suspense fallback={<P>Loading...</P>}>
+						<Routes>
+							<Route
+								path="register"
+								element={<PublicRoute component={RegisterView} restricted />}
+							/>
+							<Route
+								path="login"
+								element={<PublicRoute component={LoginView} restricted />}
+							/>
+							<Route
+								path="contacts"
+								element={<PrivateRoute component={ContactsView} />}
+							/>
+							<Route path="/home" element={<HomeView />} />
+							<Route path="*" element={<Navigate to="/home" />} />
+						</Routes>
+						<ToastContainer />
+					</Suspense>
+				</>
+			)}
+		</Container>
 	);
 }
