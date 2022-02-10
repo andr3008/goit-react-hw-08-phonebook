@@ -8,8 +8,9 @@ body {
     rgba(16, 189, 184, 0.9923319669664741) 16%,
     rgba(243, 0, 255, 1) 58%
   );
-  height: 100vh;
-  background-repeat: no-repeat;
+  height: auto;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 ul {

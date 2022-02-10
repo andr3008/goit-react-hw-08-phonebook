@@ -11,7 +11,7 @@ export default function AuthNav() {
 					style={({ isActive }) => ({
 						color: isActive ? "#dc0088" : "white",
 						textDecoration: "none",
-						paddingRight: 20,
+						paddingRight: 30,
 					})}
 				>
 					SignUp
@@ -22,7 +22,7 @@ export default function AuthNav() {
 					style={({ isActive }) => ({
 						color: isActive ? "#dc0088" : "white",
 						textDecoration: "none",
-						paddingRight: 20,
+						paddingRight: 30,
 					})}
 				>
 					SignIn

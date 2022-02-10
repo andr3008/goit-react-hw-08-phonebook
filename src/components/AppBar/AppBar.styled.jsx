@@ -7,7 +7,7 @@ export const Header = styled.header`
 	margin-right: auto;
 	margin-left: auto;
 	width: 800px;
-	padding-left: 70px;
+
 	font-weight: 700;
 	font-size: 20px;
 `;

@@ -16,7 +16,7 @@ export default function UserMenu() {
 					style={({ isActive }) => ({
 						color: isActive ? "#dc0088" : "white",
 						textDecoration: "none",
-						paddingRight: 184,
+						paddingRight: 150,
 					})}
 				>
 					Contacts

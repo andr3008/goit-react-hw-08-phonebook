@@ -23,7 +23,7 @@ export default function AppBar() {
 				style={({ isActive }) => ({
 					color: isActive ? "#dc0088" : "white",
 					textDecoration: "none",
-					paddingLeft: 20,
+					paddingLeft: 70,
 					padding: 6,
 				})}
 			>
