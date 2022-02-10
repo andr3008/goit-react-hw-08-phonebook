@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { getUsername } from "../../redux/auth/auth-selectors";
 import { logOut } from "../../redux/auth/auth-operations";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsername } from "../../redux/auth/auth-selectors";
 import { Div, Span, Button } from "./UserMenu.styled";
 
 export default function UserMenu() {
@@ -16,7 +16,7 @@ export default function UserMenu() {
 					style={({ isActive }) => ({
 						color: isActive ? "#dc0088" : "white",
 						textDecoration: "none",
-						paddingRight: 300,
+						paddingRight: 184,
 					})}
 				>
 					Contacts

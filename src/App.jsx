@@ -1,7 +1,8 @@
 import { fetchCurrentUser } from "./redux/auth/auth-operations";
 import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { ToastContainer } from "react-toastify";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Toaster } from "react-hot-toast";
 import { Routes, Route, Navigate } from "react-router-dom";
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -28,7 +29,13 @@ export default function App() {
 			) : (
 				<>
 					<AppBar />
-					<Suspense fallback={<P>Loading...</P>}>
+					<Suspense
+						fallback={
+							<P>
+								<CircularProgress disableShrink />
+							</P>
+						}
+					>
 						<Routes>
 							<Route
 								path="register"
@@ -45,7 +52,7 @@ export default function App() {
 							<Route path="home" element={<HomeView />} />
 							<Route path="*" element={<Navigate to="home" />} />
 						</Routes>
-						{/* <ToastContainer /> */}
+						<Toaster />
 					</Suspense>
 				</>
 			)}

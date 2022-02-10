@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import { Div } from "./AuthNav.styled";
 
@@ -15,7 +14,7 @@ export default function AuthNav() {
 						paddingRight: 20,
 					})}
 				>
-					Registration
+					SignUp
 				</NavLink>
 				<NavLink
 					end
@@ -26,7 +25,7 @@ export default function AuthNav() {
 						paddingRight: 20,
 					})}
 				>
-					Sign In
+					SignIn
 				</NavLink>
 			</Div>
 		</>

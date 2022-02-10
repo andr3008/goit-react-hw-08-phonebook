@@ -1,8 +1,8 @@
 import React from "react";
-
+import { H1 } from "./HomeView.styled";
 const HomeView = () => (
 	<div>
-		<h1>Welcome to phone book</h1>
+		<H1>Welcome to Phonebook</H1>
 	</div>
 );
 

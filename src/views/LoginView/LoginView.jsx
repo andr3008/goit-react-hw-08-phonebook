@@ -1,7 +1,7 @@
+import * as React from "react";
+import { logIn } from "../../redux/auth/auth-operations";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/auth-operations";
-import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -32,7 +32,7 @@ export default function LoginView() {
 
 	return (
 		<div>
-			<LoginTitle>Login page</LoginTitle>
+			<LoginTitle>SigIn</LoginTitle>
 
 			<Form onSubmit={handleSubmit} autoComplete="off">
 				<Box

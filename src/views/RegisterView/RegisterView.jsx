@@ -1,10 +1,11 @@
+import { register } from "../../redux/auth/auth-operations";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { register } from "../../redux/auth/auth-operations";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Form, LoginTitle } from "./RegisterView.styled";
+
 export default function RegisterView() {
 	const dispatch = useDispatch();
 	const [name, setName] = useState("");
@@ -34,7 +35,7 @@ export default function RegisterView() {
 
 	return (
 		<div>
-			<LoginTitle>Registration Page</LoginTitle>
+			<LoginTitle>SignUp</LoginTitle>
 
 			<Form onSubmit={handleSubmit} autoComplete="off">
 				<Box
