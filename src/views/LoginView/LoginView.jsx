@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Form, LoginTitle } from "./LoginView.styled";
+import toast from "react-hot-toast";
+import validateEmailAndPsw from "../validateEmailAndPsw/validateEmailAndPsw";
 
 export default function LoginView() {
 	const dispatch = useDispatch();
@@ -25,6 +27,13 @@ export default function LoginView() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (!validateEmailAndPsw(email)) {
+			toast.error("For example email@example.com");
+		}
+
+		if (password.length < 7) {
+			toast.error("Password must be at least 7 chars long");
+		}
 		dispatch(logIn({ email, password }));
 		setEmail("");
 		setPassword("");
@@ -58,6 +67,9 @@ export default function LoginView() {
 						value={email}
 						onChange={handleChange}
 						size="small"
+						pattern="/^[a-zA-Z0-9.!#$%’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+						title="For example email@example.com"
+						required
 					/>
 				</Box>
 				<Box
@@ -82,6 +94,9 @@ export default function LoginView() {
 						value={password}
 						onChange={handleChange}
 						size="small"
+						pattern="(?=.*\d)(?=.*[a-z]).{7,}"
+						title="Must contain at least 7 or more characters"
+						required
 					/>
 				</Box>
 				<Button type="submit" variant="contained" size="small">

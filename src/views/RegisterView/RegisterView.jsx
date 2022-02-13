@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Form, LoginTitle } from "./RegisterView.styled";
+import toast from "react-hot-toast";
+import validateEmailAndPsw from "../validateEmailAndPsw/validateEmailAndPsw";
 
 export default function RegisterView() {
 	const dispatch = useDispatch();
@@ -27,6 +29,13 @@ export default function RegisterView() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (!validateEmailAndPsw(email)) {
+			toast.error("For example email@example.com");
+		}
+
+		if (password.length < 7) {
+			toast.error("Password must be at least 7 chars long");
+		}
 		dispatch(register({ name, email, password }));
 		setName("");
 		setEmail("");
@@ -60,6 +69,9 @@ export default function RegisterView() {
 						value={name}
 						onChange={handleChange}
 						size="small"
+						pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+						title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+						required
 					/>
 				</Box>
 				<Box
@@ -85,6 +97,9 @@ export default function RegisterView() {
 						value={email}
 						onChange={handleChange}
 						size="small"
+						pattern="/^[a-zA-Z0-9.!#$%’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+						title="For example email@example.com"
+						required
 					/>
 				</Box>
 				<Box
@@ -109,6 +124,9 @@ export default function RegisterView() {
 						value={password}
 						onChange={handleChange}
 						size="small"
+						pattern="(?=.*\d)(?=.*[a-z]).{7,}"
+						title="Must contain at least 7 or more characters"
+						required
 					/>
 				</Box>
 
